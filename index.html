@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Proof-of-Skill NFT Platform | Celo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
     <style>
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
         }
         .certificate-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -17,25 +18,26 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
-        .gold-accent {
-            color: #FFD700;
-        }
+        .gold-accent { color: #FFD700; }
         .btn-primary {
             background: linear-gradient(90deg, #1e40af, #3b82f6);
             transition: all 0.3s ease;
         }
         .btn-primary:hover {
             background: linear-gradient(90deg, #1e3a8a, #2563eb);
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
+        /* Status box override */
+        #statusMessage { max-width: 380px; right: 20px; bottom: 20px; }
     </style>
 </head>
 <body class="min-h-screen">
+
     <!-- Navbar -->
     <nav class="bg-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
                     <span class="text-2xl font-bold text-blue-900">🎓 SkillCert</span>
                     <span class="ml-2 text-sm gold-accent font-semibold">Celo Network</span>
                 </div>
@@ -53,8 +55,7 @@
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
-        <!-- Home Section -->
+        <!-- Home -->
         <div id="homeSection" class="section">
             <div class="bg-white rounded-xl shadow-2xl p-12 text-center">
                 <h1 class="text-5xl font-bold text-blue-900 mb-4">Proof-of-Skill NFT Platform</h1>
@@ -82,7 +83,7 @@
             </div>
         </div>
 
-        <!-- Available Skills Section -->
+        <!-- Skills -->
         <div id="skillsSection" class="section hidden">
             <div class="bg-white rounded-xl shadow-2xl p-8">
                 <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center">Available Skill Certificates</h2>
@@ -90,7 +91,7 @@
                     <p class="text-yellow-700">⚠️ Please connect your wallet to claim certificates.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Coding Certificate -->
+                    <!-- Coding -->
                     <div class="certificate-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border-2 border-blue-200">
                         <div class="text-6xl mb-4 text-center">💻</div>
                         <h3 class="text-2xl font-bold text-blue-900 mb-2 text-center">Coding</h3>
@@ -105,7 +106,7 @@
                         </button>
                     </div>
 
-                    <!-- Design Certificate -->
+                    <!-- Design -->
                     <div class="certificate-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border-2 border-purple-200">
                         <div class="text-6xl mb-4 text-center">🎨</div>
                         <h3 class="text-2xl font-bold text-purple-900 mb-2 text-center">Design</h3>
@@ -115,12 +116,12 @@
                             <li>✓ User Experience</li>
                             <li>✓ Visual Communication</li>
                         </ul>
-                        <button onclick="claimCertificate('Design')" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-3 rounded-lg font-semibold transition-all">
+                        <button onclick="claimCertificate('Design')" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3 rounded-lg font-semibold transition-all">
                             Claim Certificate
                         </button>
                     </div>
 
-                    <!-- Marketing Certificate -->
+                    <!-- Marketing -->
                     <div class="certificate-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border-2 border-green-200">
                         <div class="text-6xl mb-4 text-center">📈</div>
                         <h3 class="text-2xl font-bold text-green-900 mb-2 text-center">Marketing</h3>
@@ -130,7 +131,7 @@
                             <li>✓ Content Strategy</li>
                             <li>✓ Analytics & SEO</li>
                         </ul>
-                        <button onclick="claimCertificate('Marketing')" class="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white py-3 rounded-lg font-semibold transition-all">
+                        <button onclick="claimCertificate('Marketing')" class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white py-3 rounded-lg font-semibold transition-all">
                             Claim Certificate
                         </button>
                     </div>
@@ -138,13 +139,11 @@
             </div>
         </div>
 
-        <!-- My Certificates Section -->
+        <!-- Certificates -->
         <div id="certificatesSection" class="section hidden">
             <div class="bg-white rounded-xl shadow-2xl p-8">
                 <h2 class="text-4xl font-bold text-blue-900 mb-8 text-center">My Skill Certificates</h2>
-                <div id="certificatesList" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Certificates will be loaded here -->
-                </div>
+                <div id="certificatesList" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
                 <div id="noCertificates" class="text-center py-12 hidden">
                     <div class="text-6xl mb-4">📜</div>
                     <p class="text-xl text-gray-600">You don't have any certificates yet.</p>
@@ -156,14 +155,14 @@
         </div>
     </div>
 
-    <!-- Status Messages -->
+    <!-- Status -->
     <div id="statusMessage" class="fixed bottom-4 right-4 hidden bg-white rounded-lg shadow-xl p-4 max-w-md">
         <p id="statusText" class="text-gray-800"></p>
     </div>
 
     <script>
-        // Contract Configuration
-        const CONTRACT_ADDRESS = "0xYourDeployedContractAddress"; // Replace with your deployed contract address
+        // ---------- CONFIG ----------
+        const CONTRACT_ADDRESS = "0x1609a371790AaC42298Ded751E111f50057A71a4"; // <-- updated
         const CONTRACT_ABI = [
             "function mintCertificate(string memory skillName) public returns (uint256)",
             "function getUserCertificates(address user) public view returns (string[] memory)",
@@ -171,25 +170,44 @@
             "function balanceOf(address owner) public view returns (uint256)"
         ];
 
-        // Celo Mainnet Configuration
         const CELO_MAINNET = {
-            chainId: '0xa4ec', // 42220 in hex
+            chainId: '0xa4ec', // 42220
             chainName: 'Celo Mainnet',
-            nativeCurrency: {
-                name: 'CELO',
-                symbol: 'CELO',
-                decimals: 18
-            },
+            nativeCurrency: { name: 'CELO', symbol: 'CELO', decimals: 18 },
             rpcUrls: ['https://forno.celo.org'],
             blockExplorerUrls: ['https://explorer.celo.org']
         };
 
-        let provider;
-        let signer;
-        let contract;
-        let userAddress;
+        let provider, signer, contract, userAddress;
 
-        // Connect Wallet Function
+        // ---------- UI Helpers ----------
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('statusMessage');
+            const statusText = document.getElementById('statusText');
+            statusText.textContent = message;
+            statusDiv.classList.remove('hidden', 'bg-blue-100', 'bg-green-100', 'bg-red-100');
+            if (type === 'success') statusDiv.classList.add('bg-green-100');
+            else if (type === 'error') statusDiv.classList.add('bg-red-100');
+            else statusDiv.classList.add('bg-blue-100');
+            clearTimeout(window._statusTimeout);
+            window._statusTimeout = setTimeout(() => statusDiv.classList.add('hidden'), 4500);
+        }
+
+        // ---------- Navigation ----------
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            if (section === 'home') document.getElementById('homeSection').classList.remove('hidden');
+            if (section === 'skills') {
+                document.getElementById('skillsSection').classList.remove('hidden');
+                document.getElementById('walletWarning').classList.add('hidden');
+            }
+            if (section === 'certificates') {
+                document.getElementById('certificatesSection').classList.remove('hidden');
+                loadUserCertificates();
+            }
+        }
+
+        // ---------- Wallet Connect ----------
         async function connectWallet() {
             try {
                 if (typeof window.ethereum === 'undefined') {
@@ -198,19 +216,14 @@
                 }
 
                 showStatus('Connecting to MetaMask...', 'info');
-
-                // Request account access
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 userAddress = accounts[0];
 
-                // Initialize provider and signer
                 provider = new ethers.providers.Web3Provider(window.ethereum);
                 signer = provider.getSigner();
 
-                // Check current network
                 const network = await provider.getNetwork();
-                
-                // If not on Celo Mainnet, attempt to switch
+
                 if (network.chainId !== 42220) {
                     try {
                         await window.ethereum.request({
@@ -218,13 +231,13 @@
                             params: [{ chainId: CELO_MAINNET.chainId }],
                         });
                     } catch (switchError) {
-                        // If network doesn't exist, add it
                         if (switchError.code === 4902) {
                             try {
                                 await window.ethereum.request({
                                     method: 'wallet_addEthereumChain',
                                     params: [CELO_MAINNET],
                                 });
+                                showStatus('Celo network added to MetaMask. Please reconnect.', 'info');
                             } catch (addError) {
                                 showStatus('Failed to add Celo network to MetaMask', 'error');
                                 return;
@@ -236,29 +249,29 @@
                     }
                 }
 
-                // Re-initialize provider after network switch
+                // Re-init provider & contract after chain switch
                 provider = new ethers.providers.Web3Provider(window.ethereum);
                 signer = provider.getSigner();
                 contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
-                // Update UI
-                document.getElementById('connectBtn').textContent = `${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
-                document.getElementById('connectBtn').classList.add('bg-green-600');
-                
+                // UI update
+                const btn = document.getElementById('connectBtn');
+                btn.textContent = `${userAddress.slice(0,6)}...${userAddress.slice(-4)}`;
+                btn.classList.add('bg-green-600');
                 showStatus('✅ Connected to Celo Mainnet!', 'success');
 
-                // Load certificates if on that page
+                // If certificates view open, load
                 if (!document.getElementById('certificatesSection').classList.contains('hidden')) {
                     loadUserCertificates();
                 }
 
             } catch (error) {
                 console.error('Connection error:', error);
-                showStatus('Failed to connect wallet: ' + error.message, 'error');
+                showStatus('Failed to connect wallet: ' + (error.message || error), 'error');
             }
         }
 
-        // Claim Certificate Function
+        // ---------- Claim / Mint ----------
         async function claimCertificate(skillName) {
             if (!userAddress) {
                 document.getElementById('walletWarning').classList.remove('hidden');
@@ -269,23 +282,33 @@
             try {
                 showStatus(`Processing ${skillName} certificate claim...`, 'info');
 
-                // Mint the certificate
                 const tx = await contract.mintCertificate(skillName);
                 showStatus('Transaction submitted! Waiting for confirmation...', 'info');
 
                 await tx.wait();
                 showStatus(`🎉 ${skillName} certificate claimed successfully!`, 'success');
 
+                // Refresh list if on certificates page
+                if (!document.getElementById('certificatesSection').classList.contains('hidden')) {
+                    loadUserCertificates();
+                }
+
             } catch (error) {
                 console.error('Claim error:', error);
-                showStatus('Failed to claim certificate: ' + error.message, 'error');
+                showStatus('Failed to claim certificate: ' + (error.reason || error.message || error), 'error');
             }
         }
 
-        // Load User Certificates
+        // ---------- Load Certificates ----------
         async function loadUserCertificates() {
+            const certificatesList = document.getElementById('certificatesList');
+            const noCertificates = document.getElementById('noCertificates');
+
+            certificatesList.innerHTML = '';
+            noCertificates.classList.add('hidden');
+
             if (!userAddress || !contract) {
-                document.getElementById('noCertificates').classList.remove('hidden');
+                noCertificates.classList.remove('hidden');
                 return;
             }
 
@@ -293,101 +316,64 @@
                 showStatus('Loading your certificates...', 'info');
 
                 const certificates = await contract.getUserCertificates(userAddress);
-                const certificatesList = document.getElementById('certificatesList');
-                const noCertificates = document.getElementById('noCertificates');
 
-                certificatesList.innerHTML = '';
-
-                if (certificates.length === 0) {
+                if (!certificates || certificates.length === 0) {
                     noCertificates.classList.remove('hidden');
-                } else {
-                    noCertificates.classList.add('hidden');
-
-                    certificates.forEach((skill, index) => {
-                        const icon = skill === 'Coding' ? '💻' : skill === 'Design' ? '🎨' : '📈';
-                        const color = skill === 'Coding' ? 'blue' : skill === 'Design' ? 'purple' : 'green';
-                        
-                        const card = document.createElement('div');
-                        card.className = `certificate-card bg-gradient-to-br from-${color}-50 to-${color}-100 rounded-xl p-6 border-2 border-${color}-300`;
-                        card.innerHTML = `
-                            <div class="text-6xl mb-4 text-center">${icon}</div>
-                            <h3 class="text-2xl font-bold text-${color}-900 mb-2 text-center">${skill}</h3>
-                            <div class="bg-white rounded p-3 mt-4">
-                                <p class="text-xs text-gray-600">Certificate #${index + 1}</p>
-                                <p class="text-xs text-gray-600 mt-1">Owner: ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}</p>
-                                <p class="text-xs text-gray-600 mt-1">Blockchain: Celo Mainnet</p>
-                            </div>
-                            <div class="mt-4 text-center">
-                                <span class="inline-block bg-green-500 text-white text-xs px-3 py-1 rounded-full">✓ Verified</span>
-                            </div>
-                        `;
-                        certificatesList.appendChild(card);
-                    });
-
-                    showStatus('Certificates loaded successfully!', 'success');
+                    showStatus('No certificates found yet.', 'info');
+                    return;
                 }
+
+                certificates.forEach((skill, idx) => {
+                    const icon = skill === 'Coding' || skill === 'Coding' ? '💻' : skill === 'Design' ? '🎨' : '📈';
+                    const color = skill === 'Coding' || skill === 'Coding' ? 'blue' : skill === 'Design' ? 'purple' : 'green';
+
+                    const card = document.createElement('div');
+                    card.className = `certificate-card bg-gradient-to-br from-${color}-50 to-${color}-100 rounded-xl p-6 border-2 border-${color}-300`;
+                    card.innerHTML = `
+                        <div class="text-6xl mb-4 text-center">${icon}</div>
+                        <h3 class="text-2xl font-bold ${color === 'blue' ? 'text-blue-900' : color === 'purple' ? 'text-purple-900' : 'text-green-900'} mb-2 text-center">${skill}</h3>
+                        <div class="bg-white rounded p-3 mt-4">
+                            <p class="text-xs text-gray-600">Certificate #${idx + 1}</p>
+                            <p class="text-xs text-gray-600 mt-1">Owner: ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}</p>
+                            <p class="text-xs text-gray-600 mt-1">Blockchain: Celo Mainnet</p>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <span class="inline-block bg-green-500 text-white text-xs px-3 py-1 rounded-full">✓ Verified</span>
+                        </div>
+                    `;
+                    certificatesList.appendChild(card);
+                });
+
+                showStatus('Certificates loaded successfully!', 'success');
 
             } catch (error) {
                 console.error('Load certificates error:', error);
-                showStatus('Failed to load certificates: ' + error.message, 'error');
-                document.getElementById('noCertificates').classList.remove('hidden');
+                showStatus('Failed to load certificates: ' + (error.reason || error.message || error), 'error');
+                noCertificates.classList.remove('hidden');
             }
         }
 
-        // Show Section
-        function showSection(section) {
-            document.getElementById('homeSection').classList.add('hidden');
-            document.getElementById('skillsSection').classList.add('hidden');
-            document.getElementById('certificatesSection').classList.add('hidden');
-
-            if (section === 'home') {
-                document.getElementById('homeSection').classList.remove('hidden');
-            } else if (section === 'skills') {
-                document.getElementById('skillsSection').classList.remove('hidden');
-                document.getElementById('walletWarning').classList.add('hidden');
-            } else if (section === 'certificates') {
-                document.getElementById('certificatesSection').classList.remove('hidden');
-                loadUserCertificates();
-            }
-        }
-
-        // Show Status Message
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('statusMessage');
-            const statusText = document.getElementById('statusText');
-            
-            statusText.textContent = message;
-            statusDiv.classList.remove('hidden', 'bg-blue-100', 'bg-green-100', 'bg-red-100');
-            
-            if (type === 'success') {
-                statusDiv.classList.add('bg-green-100');
-            } else if (type === 'error') {
-                statusDiv.classList.add('bg-red-100');
-            } else {
-                statusDiv.classList.add('bg-blue-100');
-            }
-            
-            setTimeout(() => {
-                statusDiv.classList.add('hidden');
-            }, 5000);
-        }
-
-        // Handle account and network changes
+        // ---------- Auto handlers ----------
         if (typeof window.ethereum !== 'undefined') {
             window.ethereum.on('accountsChanged', (accounts) => {
-                if (accounts.length === 0) {
+                if (!accounts || accounts.length === 0) {
                     userAddress = null;
                     document.getElementById('connectBtn').textContent = 'Connect Wallet';
                     document.getElementById('connectBtn').classList.remove('bg-green-600');
                 } else {
+                    // reload to re-initialize signer & contract
                     location.reload();
                 }
             });
 
             window.ethereum.on('chainChanged', (chainId) => {
+                // simple reload on chain change
                 location.reload();
             });
         }
+
+        // Init default view
+        showSection('home');
     </script>
 </body>
 </html>
